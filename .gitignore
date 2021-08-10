@@ -1,0 +1,18 @@
+#comentario
+*.[oa]
+*~
+
+#Jasmine
+*package-lock.json
+*node_modules
+*jasmine.json
+
+#Java
+*.class
+*.classpath*
+*.project*
+*.settings*
+*jstl-1.2.jar
+
+#SpringTools (eclipse)
+*.metadata*
