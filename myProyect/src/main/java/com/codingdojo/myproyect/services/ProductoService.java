@@ -1,5 +1,6 @@
 package com.codingdojo.myproyect.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,4 +40,15 @@ public class ProductoService {
             return;
         }
     }
+	public List<Producto> findByNombreNotIn(List<Producto> productos){
+		if(productos==null|| productos.size()==0) {
+			return productoRepository.findAll();
+		}
+		ArrayList<String> nombres=new ArrayList<String>();
+		for(Producto p:productos) {
+			nombres.add(p.getNombre());
+		}
+		
+		return productoRepository.findByNombreNotIn(nombres);
+	}
 }

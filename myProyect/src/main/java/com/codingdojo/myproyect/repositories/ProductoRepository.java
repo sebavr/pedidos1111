@@ -10,4 +10,6 @@ import com.codingdojo.myproyect.models.Producto;
 @Repository
 public interface ProductoRepository extends CrudRepository<Producto, Long>{
     List<Producto> findAll();
+    
+    List<Producto> findByNombreNotIn(List<String> nombres);
 }
