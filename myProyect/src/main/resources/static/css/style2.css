@@ -1,0 +1,31 @@
+body{
+	background-color:#111111;
+}
+
+#encabezado{
+	background-color:#000000;
+}
+#encabezado img {
+	height:100px;
+}
+#encabezado a{
+	color:white;
+}
+
+#enlaces a{
+	color:#aaaaaa;
+}
+#entrar{
+	color:white;
+	font-weight:bold;
+	background-color:#80171f;
+}
+.fontzero{
+	font-size:0px;
+}
+.casilla{
+	font-size:14px;
+	background-color:#222222;
+	color:#eeeeee;
+}
+

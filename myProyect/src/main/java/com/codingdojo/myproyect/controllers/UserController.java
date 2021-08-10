@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.myproyect.models.Categoria;
 import com.codingdojo.myproyect.models.Producto;
+import com.codingdojo.myproyect.models.Role;
 import com.codingdojo.myproyect.models.User;
 import com.codingdojo.myproyect.services.UserService;
 import com.codingdojo.myproyect.validator.UserValidator;
@@ -66,8 +67,16 @@ public class UserController {
 	//////////////////////  Home & admin pages ////////////////////////////////////////////
     @RequestMapping("/")
     public String home(Principal principal, Model model) {
-        
-        return "redirect:/admin/dashboard";
+    	if(principal!=null) {
+    		String email = principal.getName();
+        	User user=userService.findByEmail(email);
+            Role role=user.getRole();
+            if(role.getName().equals("ROLE_ADMIN")) {
+            	return "redirect:/admin/dashboard";
+            }
+    	}
+    	return "redirect:/pedir";
+    	
     }
 	
 	@RequestMapping("/admin/dashboard")
