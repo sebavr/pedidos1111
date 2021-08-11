@@ -14,13 +14,26 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/style2.css">
-	<title>Pedidos</title>
+	<title>Pedir</title>
 </head>
 <body>
 
 	<div id="encabezado" class="container-fluid">
 		 <img class="rounded mx-auto d-block" src="imagenes/logo1.png" alt="Italian Trulli">
-		 <div class="d-flex justify-content-end"><a id="entrar" class="py-2 px-3 rounded" href="/login">Entrar <i class="bi bi-box-arrow-up"></i></a></div>
+		 
+		<c:choose>
+  			<c:when test="${user!=null}">
+  			<div class="d-flex justify-content-end">
+  				<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
+        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        			<button type="submit" class="btn btn-danger">Logout</button>
+    			</form>	
+    		</div>			
+			</c:when>
+			<c:otherwise>
+		 		<div class="d-flex justify-content-end"><a id="entrar" class="py-2 px-3 rounded" href="/login">Entrar <i class="bi bi-box-arrow-up"></i></a></div>
+			</c:otherwise>
+		</c:choose>
 		 <ul class="nav justify-content-center mt-0">
   			<li class="nav-item">
 				<h4><a class="nav-link disabled" href="" disable>Inicio</a></h4>
@@ -37,8 +50,11 @@
 		</ul>
 	</div>
 	
+	<div class="mx-3 d-flex justify-content-end">
+		<a class="btn btn-danger" href="/user/checkout" role="button">Ir al carro</a>
+	</div>
 	<div id="enlaces" class="container-fluid">
-		<div class="border border-secondary my-4"></div>
+		<div class="border border-secondary mb-4"></div>
 		<ul class="nav justify-content-center mt-3">
 		<c:forEach var="categoria" items="${categorias}">
     		<li class="nav-item">
@@ -48,8 +64,10 @@
 		</ul>
 	</div>
 	
+	
 	<div class="container">
 		<div class="row">
+		
 		<c:forEach var="categoria" items="${categorias}">
     	<div id="${categoria.nombre}" class="container-fluid fontzero">
 			<h4 class="text-white">${categoria.nombre}</h4>
@@ -71,6 +89,7 @@
 			</c:forEach>
 		</div>	
 		</c:forEach>
+		
 		</div>
 	</div>
 	
