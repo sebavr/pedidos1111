@@ -12,14 +12,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/style2.css">
-	<title>Pedidos</title>
+	<title>Welcome</title>
 </head>
 <body>
-
 	<div id="encabezado" class="container-fluid">
-		 <img class="rounded mx-auto d-block" src="imagenes/logo1.png" alt="Italian Trulli">
+		 <img class="rounded mx-auto d-block" src="/imagenes/logo1.png" alt="Italian Trulli">
 		 <div class="d-flex justify-content-end"><a id="entrar" class="py-2 px-3 rounded" href="/login">Entrar <i class="bi bi-box-arrow-up"></i></a></div>
 		 <ul class="nav justify-content-center mt-0">
   			<li class="nav-item">
@@ -36,46 +34,12 @@
   			</li>
 		</ul>
 	</div>
-	
-	<div id="enlaces" class="container-fluid">
-		<div class="border border-secondary my-4"></div>
-		<ul class="nav justify-content-center mt-3">
-		<c:forEach var="categoria" items="${categorias}">
-    		<li class="nav-item">
-				<a class="nav-link" href="#<c:out value="${categoria.nombre}"/>">${categoria.nombre}</a>
-			</li>
-		</c:forEach>
-		</ul>
-	</div>
-	
-	<div class="container">
-		<div class="row">
-		<c:forEach var="categoria" items="${categorias}">
-    	<div id="${categoria.nombre}" class="container-fluid fontzero">
-			<h4 class="text-white">${categoria.nombre}</h4>
-			<c:forEach var="producto" items="${categoria.productoList}">
-    			<div class="col-lg-4 d-inline-block px-0">
-    				<div class="casilla p-2 m-2">
-    					<div class="row">
-    						<div class="col-lg-6">
-    							<p>${producto.nombre}</p>
-    							<p>${producto.precio}</p>
-    							<a href="/producto/${producto.id}">Detalles</a>
-    						</div>
-    						<div class="col-lg-6">
-    							<img class="rounded mx-auto d-block" height="150px" src="imagenes/polloasado.jpeg" alt="Italian Trulli">
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-			</c:forEach>
-		</div>	
-		</c:forEach>
-		</div>
-	</div>
-	
 
-		
+	<div class="container my-4 mybg">
+		<div class="col-lg-6"></div>
+		<div class="col-lg-6"></div>
+	</div>
+			
 		
 	
 	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

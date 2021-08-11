@@ -47,6 +47,7 @@ public class ProductoController {
 	
 		return "redirect:/admin/dashboard";
 	}
+
 	
 	
 	
@@ -129,4 +130,14 @@ public class ProductoController {
         return "redirect:/admin/editar/producto/"+productoId;
     }    
 	
+	@RequestMapping("/producto/{id}")
+	public String detallesProducto(@PathVariable("id") Long id,Model model) {
+		Producto producto= productoService.findProducto(id);
+		if(producto==null) {
+			return "redirect:/pedir";
+		}
+		model.addAttribute("producto", producto);
+		return "detallesProducto.jsp";
+	}
+
 }
