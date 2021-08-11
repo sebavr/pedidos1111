@@ -65,6 +65,17 @@ public class Pedido {
 	public Pedido(){
 		
 	}
+	
+	public Pedido(User user) {
+		super();
+		this.user = user;
+	}
+	
+	public Pedido(User user, List<Producto> productoList) {
+		super();
+		this.user = user;
+		this.productoList = productoList;
+	}
 	public Long getId() {
 		return id;
 	}

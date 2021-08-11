@@ -26,7 +26,7 @@ public class ProductoPedido {
 	//********** Atributos o Campos ********************
 	//@Min(0)
 	//@Size(min = 5, max = 200)
-	private Integer Cantidad;
+	private Integer cantidad;
 	//------------createdAt updatedAt------------------
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -58,17 +58,26 @@ public class ProductoPedido {
 	public ProductoPedido(){
 		
 	}
+	
+
+	public ProductoPedido(Pedido pedido,Producto producto,Integer cantidad) {
+		super();
+		this.cantidad = cantidad;
+		this.producto = producto;
+		this.pedido = pedido;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Integer getCantidad() {
-		return Cantidad;
+		return cantidad;
 	}
 	public void setCantidad(Integer cantidad) {
-		Cantidad = cantidad;
+		this.cantidad = cantidad;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
