@@ -1,11 +1,13 @@
 package com.codingdojo.myproyect.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.codingdojo.myproyect.models.Categoria;
+import com.codingdojo.myproyect.models.Producto;
 import com.codingdojo.myproyect.repositories.CategoriaRepository;
 
 @Service
@@ -39,4 +41,16 @@ public class CategoriaService {
             return;
         }
     }
+	
+	public List<Categoria> findByNombreNotIn(List<Categoria> categorias){
+		if(categorias==null|| categorias.size()==0) {
+			return categoriaRepository.findAll();
+		}
+		ArrayList<String> nombres=new ArrayList<String>();
+		for(Categoria c:categorias) {
+			nombres.add(c.getNombre());
+		}
+		
+		return categoriaRepository.findByNombreNotIn(nombres);
+	}
 }

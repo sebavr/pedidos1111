@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.codingdojo.myproyect.models.Categoria;
 
+
 @Repository
 public interface CategoriaRepository extends CrudRepository<Categoria, Long>{
     List<Categoria> findAll();
+    
+    List<Categoria> findByNombreNotIn(List<String> nombres);
 }

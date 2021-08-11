@@ -21,6 +21,9 @@
 	
 		<ul class="nav">
   			<li class="nav-item">
+				<a class="nav-link" href="/admin/productos">Productos</a>
+			</li>
+  			<li class="nav-item">
 				<a class="nav-link" href="/admin/categorias">Categorias</a>
 			</li>
 			<li class="nav-item">
