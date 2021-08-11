@@ -13,19 +13,13 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-	<title>Categorias</title>
+	<title>Welcome</title>
 </head>
 <body>
 
 	<div class="container my-4">
 	
 		<ul class="nav">
-  			<li class="nav-item">
-				<a class="nav-link" href="/admin/productos">Productos</a>
-			</li>
-  			<li class="nav-item">
-				<a class="nav-link" href="/admin/categorias">Categorias</a>
-			</li>
 			<li class="nav-item">
     			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -33,52 +27,9 @@
     			</form>	
   			</li>
 		</ul>
-		
-		<h1>Categorias</h1>
-		
-		<div class="row">
-			<div class="col-lg-5">
-				<table class="table table-sm table-borderless border border-dark">
-					<thead class="bg-mybg text-white">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Opciones</th>
-						</tr>
-					</thead>
-					<tbody class="bg-white">
-						<c:forEach var="categoria" items="${categorias}">
-						<tr>
-							<td>${categoria.id}</td>
-							<td>${categoria.nombre}</td>
-							<td><a href="/admin/editar/categoria/${categoria.id }">Editar</a> <a href="/admin/eliminar/categoria/${categoria.id }">Eliminar</a></td>
-						</tr>
-						</c:forEach>		
-					</tbody>
-				</table>
-			</div>
-			
-			<div class="offset-lg-2 col-lg-5">
-				<div class="text-white bg-mybg border border-dark border-bottom-0">
-					<p class="my-0 mx-3 p-2">Crear nueva categoria</p>
-				</div>
-				<form:form action="/admin/crear/categoria" method="POST" modelAttribute="categoria" class="border border-dark p-4 bg-white">
-					<div class="form-group row">
-						<form:label for="nombre" class="col-lg-4 col-form-label" path="nombre">Nombre: </form:label>
-						<div class="col-lg">
-							<form:errors path="nombre"/>
-       						<form:input type="text" id="nombre" class="form-control" path="nombre" required="true"/>
-						</div>
-					</div>
-
-					<button type="submit" class="offset-lg-9 col-lg-3 btn btn-block btn-outline-dark">Añadir</button>
-					<c:if test = "${errorReg != null}">
-    					<p class="text-danger">${errorReg}</p>				
-					</c:if>
-				</form:form>
-			</div>
-		
-		</div>
+  		<h1>Gracias ${user.nombre}</h1>
+		<h3>Tu pedido esta registrado</h3>
+		<h3>Pedido ID: ${pedidoId}</h3>
 		
 	</div>
 			

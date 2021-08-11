@@ -103,14 +103,14 @@ public class PedidoController {
     	//pedido.setProductoList(carro);
 
     	pedido=pedidoService.createOrUpdatePedido(pedido);
-
-    	for(Object[] arr:carro) {
-    		Producto producto=(Producto) arr[0];
-    		Integer cantidad=(Integer) arr[1];
-    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad);
-    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
-    	}
-    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
+//
+//    	for(Object[] arr:carro) {
+//    		Producto producto=(Producto) arr[0];
+//    		Integer cantidad=(Integer) arr[1];
+//    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad);
+//    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
+//    	}
+//    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
     	return "redirect:/user/fin";
     }
     
