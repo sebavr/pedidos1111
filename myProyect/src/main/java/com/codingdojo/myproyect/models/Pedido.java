@@ -2,6 +2,7 @@ package com.codingdojo.myproyect.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,8 @@ public class Pedido {
 	//@Min(0)
 	//@Size(min = 5, max = 200)
 	private Integer numeroOrden;
+	
+	
 	//------------createdAt updatedAt------------------
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -71,11 +74,15 @@ public class Pedido {
 		this.user = user;
 	}
 	
-	public Pedido(User user, List<Producto> productoList) {
+	
+	public Pedido(Integer numeroOrden, User user, List<Producto> productoList) {
 		super();
+		this.numeroOrden = numeroOrden;
 		this.user = user;
 		this.productoList = productoList;
+		
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -83,7 +90,11 @@ public class Pedido {
 		this.id = id;
 	}
 	public Integer getNumeroOrden() {
-		return numeroOrden;
+//		Random Num_Orden = new Random();
+//    	int minNumber = 100000;
+//		int Random = Num_Orden.nextInt(minNumber) + 1;
+//        setNumeroOrden(Random);
+		return this.numeroOrden;
 	}
 	public void setNumeroOrden(Integer numeroOrden) {
 		this.numeroOrden = numeroOrden;
@@ -112,7 +123,21 @@ public class Pedido {
 	public void setProductoList(List<Producto> productoList) {
 		this.productoList = productoList;
 	}
-	
+//	public double getPrecioTotal() {
+//		double PrecioTotal=0.0;
+//		for (Producto productos : this.productoList) {
+//			precioTotal += productos.getPrecio();
+//		}
+//
+//		return precioTotal;
+//		}
+//
+//	public void setPrecioTotal(Double precioTotal) {
+//		this.precioTotal = precioTotal;
+//	}
+//	
+//	
+		
 	//**********Getters Setters************************
 	
 }

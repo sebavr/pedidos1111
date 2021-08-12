@@ -29,7 +29,8 @@
 		</ul>
   		<h1>Gracias ${user.nombre}</h1>
 		<h3>Tu pedido esta registrado</h3>
-		<h3>Pedido ID: ${pedidoId}</h3>
+		<h3>Número de Orden: ${numeroOrden}</h3> 
+		<!-- No me esta trayendo el numero de orden, sin embargo esta en la BD, ese es e nombre dle campo no? -->
 		
 	</div>
 			

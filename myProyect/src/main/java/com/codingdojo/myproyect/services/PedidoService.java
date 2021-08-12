@@ -2,6 +2,7 @@ package com.codingdojo.myproyect.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,12 @@ public class PedidoService {
             return null;
         }
     }
+
+    
 	public Pedido createOrUpdatePedido(Pedido pedido) {
         return pedidoRepository.save(pedido);
     }
+	
 	public void deletePedido(Long id) {
     	Optional<Pedido> optionalPedido = pedidoRepository.findById(id);
         if(optionalPedido.isPresent()) {
@@ -38,5 +42,11 @@ public class PedidoService {
         } else {
             return;
         }
-    }
+	}
+		
+
 }
+
+
+   
+	

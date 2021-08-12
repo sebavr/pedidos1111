@@ -3,12 +3,15 @@ package com.codingdojo.myproyect.controllers;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +72,7 @@ public class PedidoController {
     	session.setAttribute("carro", carro);
     	return "redirect:/pedir";
     }
+  
     @RequestMapping("/user/checkout")
     public String checkout(Model model,HttpSession session,Principal principal) {
     	String email = principal.getName();
@@ -80,11 +84,19 @@ public class PedidoController {
     	}else {
     		carro= (ArrayList<Object[]>) session.getAttribute("carro");
     	}
+    	Double precioTotal=0.0;
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		precioTotal+=producto.getPrecio()*cantidad;
+    	}
+    	model.addAttribute("precioTotal", precioTotal);
     	model.addAttribute("carro", carro);
     	model.addAttribute("user", user);
     	return "checkout.jsp";
     }
-    @RequestMapping(value="/user/confirmar",method=RequestMethod.POST)
+   
+	@RequestMapping(value="/user/confirmar",method=RequestMethod.POST)
     public String confirmar(Principal principal, HttpSession session,RedirectAttributes redirectAttributes) {
     	String email = principal.getName();
     	User user=userService.findByEmail(email);
@@ -99,18 +111,27 @@ public class PedidoController {
     	}
     	
     	Pedido pedido=new Pedido(user);
-    	//agregar numero de orden
-    	//pedido.setProductoList(carro);
-
+    	Random Num_Orden = new Random();
+    	int minNumber = 100000;
+		int Random = Num_Orden.nextInt(minNumber) + 1;
+        pedido.setNumeroOrden(Random);
+    	
+    	
+    	//pedido.setProductoList(null);
     	pedido=pedidoService.createOrUpdatePedido(pedido);
-//
-//    	for(Object[] arr:carro) {
-//    		Producto producto=(Producto) arr[0];
-//    		Integer cantidad=(Integer) arr[1];
-//    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad);
-//    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
-//    	}
-//    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
+    	
+    	Double precioTotal=0.0;
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		precioTotal+=producto.getPrecio()*cantidad;
+    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
+    		
+    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
+    	}
+      	
+    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
+    	redirectAttributes.addFlashAttribute("numeroOrden", pedido.getNumeroOrden());
     	return "redirect:/user/fin";
     }
     
@@ -118,8 +139,24 @@ public class PedidoController {
     public String fin(Model model,HttpSession session,Principal principal) {
     	String email = principal.getName();
     	User user=userService.findByEmail(email);
-    	
+ 	
     	model.addAttribute("user", user);
+  	
     	return "fin.jsp";
     }
+    
+////////////////////////Pagina pedidos //////////////////////////////////////////////
+    @RequestMapping ("admin/allPedidos")
+        public String showAll( Model model) {
+    	List<ProductoPedido> productoPedidos=productoPedidoService.allProductoPedido();
+    	    	model.addAttribute("productoPedidos", productoPedidos);
+
+    	    	return "pedidos.jsp";
+    
+    }
+  
+
 }
+    
+
+

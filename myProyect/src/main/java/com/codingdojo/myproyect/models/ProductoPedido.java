@@ -27,6 +27,8 @@ public class ProductoPedido {
 	//@Min(0)
 	//@Size(min = 5, max = 200)
 	private Integer cantidad;
+    private Double precioTotal;
+	
 	//------------createdAt updatedAt------------------
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -54,17 +56,21 @@ public class ProductoPedido {
 	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
 	
+
+	
     //---------------Constructores-------------------
 	public ProductoPedido(){
 		
 	}
 	
 
-	public ProductoPedido(Pedido pedido,Producto producto,Integer cantidad) {
-		super();
+	public ProductoPedido(Pedido pedido,Producto producto,Integer cantidad, Double precioTotal) { //, Double precioTotal{
+	
 		this.cantidad = cantidad;
 		this.producto = producto;
 		this.pedido = pedido;
+		this.precioTotal=precioTotal;
+		
 	}
 	public Long getId() {
 		return id;
@@ -103,6 +109,15 @@ public class ProductoPedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+
+//	//metodo
+  public Double getPrecioTotal(){
+	return precioTotal;
+	}
+	public void setPrecioTotal(Double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
 	
 	//**********Getters Setters************************
 	

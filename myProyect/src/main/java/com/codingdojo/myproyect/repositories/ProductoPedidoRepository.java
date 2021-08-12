@@ -9,5 +9,6 @@ import com.codingdojo.myproyect.models.ProductoPedido;
 
 @Repository
 public interface ProductoPedidoRepository extends CrudRepository<ProductoPedido, Long>{
+	
     List<ProductoPedido> findAll();
 }

@@ -27,6 +27,9 @@
 				<a class="nav-link" href="/admin/categorias">Categorias</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="/admin/allPedidos">Pedidos</a>
+			</li>
+			<li class="nav-item">
     			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         			<button type="submit" class="btn btn-link mb-1">Logout</button>
