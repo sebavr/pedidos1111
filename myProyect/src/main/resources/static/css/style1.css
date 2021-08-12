@@ -1,0 +1,26 @@
+body{
+	background-color:#1A0008;
+}
+.bg-mybg{
+	background-color:#343a40;/* 343a40 */ 
+}
+
+h1,h3{
+	color:white;
+	background-color:#82151d;
+	    margin-bottom: 0px;
+	    
+	
+}
+
+.texto{
+	opacity: 0.75;
+	text-align:center;
+	border: #82151d 5px ridge;
+	
+    width: 510px;
+	
+    margin-left: 300px;
+	
+	
+}

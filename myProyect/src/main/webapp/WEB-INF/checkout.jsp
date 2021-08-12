@@ -12,10 +12,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
 	<title>Checkout</title>
 </head>
-<body>
+<body><div id="encabezado" class="container-fluid">
+		 <img class="rounded mx-auto d-block" src="/imagenes/Logo1.png" alt="Italian Trulli">
+		 </div>
 
 	<div class="container my-4">
   		<ul class="nav">
@@ -35,7 +37,7 @@
 		<div class="row my-3">
 			<div class="col-lg-12">
 				<table class="table table-sm table-borderless border border-dark">
-					<thead class="bg-mybg text-white">
+					<thead class="bg-danger text-white">
 						<tr>
 							<th scope="col">Producto</th>
 							<th scope="col">Precio/unidad</th>

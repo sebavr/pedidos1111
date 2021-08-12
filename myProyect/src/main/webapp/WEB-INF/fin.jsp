@@ -12,10 +12,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
 	<title>Welcome</title>
 </head>
-<body>
+<body><div id="encabezado" class="container-fluid">
+		 <img class="rounded mx-auto d-block" src="/imagenes/Logo1.png" alt="Italian Trulli">
+		 </div>
 
 	<div class="container my-4">
 	
@@ -30,6 +32,7 @@
     			</form>	
   			</li>
 		</ul>
+		<div class="texto">
 		<c:choose>
   			<c:when test="${prodsNoStock!=null}">
   				<h1>Lo sentimos ${user.nombre}</h1>
@@ -45,7 +48,7 @@
 				<h3>Pedido orden: ${numeroOrden}</h3>					
 			</c:otherwise>
 		</c:choose>
-		
+		</div>
 	</div>
 			
 		
