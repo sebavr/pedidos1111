@@ -21,16 +21,30 @@
 	
 		<ul class="nav">
 			<li class="nav-item">
+    			<a class="nav-link" href="/">Home</a>
+  			</li>
+			<li class="nav-item">
     			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         			<button type="submit" class="btn btn-link mb-1">Logout</button>
     			</form>	
   			</li>
 		</ul>
-  		<h1>Gracias ${user.nombre}</h1>
-		<h3>Tu pedido esta registrado</h3>
-		<h3>Número de Orden: ${numeroOrden}</h3> 
-		<!-- No me esta trayendo el numero de orden, sin embargo esta en la BD, ese es e nombre dle campo no? -->
+		<c:choose>
+  			<c:when test="${prodsNoStock!=null}">
+  				<h1>Lo sentimos ${user.nombre}</h1>
+				<h3>Tu pedido No se ha registrado</h3>
+				<h3>Productos con error:</h3>
+				<c:forEach var="msg" items="${prodsNoStock}">
+    				<p class="text-danger"><c:out value="${msg}"/></p>
+				</c:forEach>					
+			</c:when>
+			<c:otherwise>
+				<h1>Gracias ${user.nombre}</h1>
+				<h3>Tu pedido esta registrado</h3>
+				<h3>Pedido orden: ${numeroOrden}</h3>					
+			</c:otherwise>
+		</c:choose>
 		
 	</div>
 			

@@ -52,7 +52,7 @@
    						<label for="instrucciones" class="font-weight-bold">Instrucciones especiales</label>
     					<textarea class="form-control" id="instrucciones" rows="3" name="instrucciones"></textarea>
  					</div>
- 					
+ 					<p class="font-weight-bold">Stock: ${producto.stock}</p>
  					<div class="form-group row">
 						<div class="col-lg-3">
 							<input type="number" onchange="calcular()" id="cantidad" min="1" class="form-control" name="cantidad" value="1">

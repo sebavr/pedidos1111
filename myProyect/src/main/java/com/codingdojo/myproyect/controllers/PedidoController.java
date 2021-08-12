@@ -109,6 +109,20 @@ public class PedidoController {
     	if(carro==null||carro.size()==0) {
     		return "redirect:/pedir";
     	}
+    	//Verificar Stock disponible para cada producto en el carro
+    	ArrayList<String> prodsNoStock=new ArrayList<String>();
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		if(producto.getStock()-cantidad<0) {
+    			prodsNoStock.add(producto.getNombre()+" Disponible: "+producto.getStock()+" Solicitado: "+cantidad);
+    		}
+    	}
+    	if(prodsNoStock.size()!=0) {
+    		carro.clear();
+    		redirectAttributes.addFlashAttribute("prodsNoStock", prodsNoStock);
+        	return "redirect:/user/fin";
+    	}
     	
     	Pedido pedido=new Pedido(user);
     	Random Num_Orden = new Random();
@@ -124,14 +138,19 @@ public class PedidoController {
     	for(Object[] arr:carro) {
     		Producto producto=(Producto) arr[0];
     		Integer cantidad=(Integer) arr[1];
-    		precioTotal+=producto.getPrecio()*cantidad;
-    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
     		
+    		producto.setStock(producto.getStock()-cantidad);
+    		
+    		precioTotal+=producto.getPrecio()*cantidad;
+    		productoService.createOrUpdateProducto(producto);
+    		
+    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
     		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
     	}
       	
-    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
     	redirectAttributes.addFlashAttribute("numeroOrden", pedido.getNumeroOrden());
+
+    	carro.clear();
     	return "redirect:/user/fin";
     }
     
@@ -144,6 +163,7 @@ public class PedidoController {
   	
     	return "fin.jsp";
     }
+
     
 ////////////////////////Pagina pedidos //////////////////////////////////////////////
     @RequestMapping ("admin/allPedidos")
@@ -155,6 +175,61 @@ public class PedidoController {
     
     }
   
+
+
+    @RequestMapping(value="/user/eliminar/carro/{productoId}",method=RequestMethod.GET)
+    public String eliminarCarro(@PathVariable("productoId") Long productoId,
+    		HttpSession session) {
+    	ArrayList<Object[]> carro=new ArrayList<Object[]>();
+    	if(session.getAttribute("carro")==null) {
+    		session.setAttribute("carro", carro);
+    	}else {
+    		carro= (ArrayList<Object[]>) session.getAttribute("carro");
+    	}
+    	
+    	int index=0;
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		if(productoId==producto.getId()) {
+    			carro.remove(index);
+    			break;
+    		}
+    		index+=1;
+    	}
+    	
+    	session.setAttribute("carro", carro);
+    	return "redirect:/user/checkout";
+    }
+    @RequestMapping(value="/user/editar/carro/{productoId}/{step}",method=RequestMethod.GET)
+    public String editarCarro(@PathVariable("productoId") Long productoId,@PathVariable("step") Integer step,
+    		HttpSession session) {
+    	ArrayList<Object[]> carro=new ArrayList<Object[]>();
+    	if(session.getAttribute("carro")==null) {
+    		session.setAttribute("carro", carro);
+    	}else {
+    		carro= (ArrayList<Object[]>) session.getAttribute("carro");
+    	}
+    	
+    	ArrayList<Object[]> newCarro=new ArrayList<Object[]>();
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		
+    		if(productoId==producto.getId()) {
+    			Integer newCantidad=cantidad+step;
+    			if(newCantidad<1) {
+    				newCantidad=1;
+    			}
+    			Object arrTemp[]= {producto,newCantidad};
+    			newCarro.add(arrTemp);
+    		}else {
+    			newCarro.add(arr);
+    		}
+    	}
+    	
+    	session.setAttribute("carro", newCarro);
+    	return "redirect:/user/checkout";
+    }
 
 }
     
