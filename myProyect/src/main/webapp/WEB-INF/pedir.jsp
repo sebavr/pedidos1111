@@ -72,12 +72,14 @@
     	<div id="${categoria.nombre}" class="container-fluid fontzero">
 			<h4 class="text-white">${categoria.nombre}</h4>
 			<c:forEach var="producto" items="${categoria.productoList}">
+			<c:if test = "${producto.stock != 0}">
     			<div class="col-lg-4 d-inline-block px-0">
     				<div class="casilla p-2 m-2">
     					<div class="row">
     						<div class="col-lg-6">
     							<p>${producto.nombre}</p>
-    							<p>${producto.precio}</p>
+    							<p>$${producto.precio}</p>
+    							<p>Stock: ${producto.stock}</p>
     							<a href="/producto/${producto.id}">Detalles</a>
     						</div>
     						<div class="col-lg-6">
@@ -86,6 +88,7 @@
     					</div>
     				</div>
     			</div>
+    		</c:if>	
 			</c:forEach>
 		</div>	
 		</c:forEach>

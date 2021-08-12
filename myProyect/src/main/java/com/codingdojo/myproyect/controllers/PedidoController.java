@@ -80,6 +80,13 @@ public class PedidoController {
     	}else {
     		carro= (ArrayList<Object[]>) session.getAttribute("carro");
     	}
+    	Double precioTotal=0.0;
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		precioTotal+=producto.getPrecio()*cantidad;
+    	}
+    	model.addAttribute("precioTotal", precioTotal);
     	model.addAttribute("carro", carro);
     	model.addAttribute("user", user);
     	return "checkout.jsp";
@@ -97,20 +104,37 @@ public class PedidoController {
     	if(carro==null||carro.size()==0) {
     		return "redirect:/pedir";
     	}
+    	//Verificar Stock disponible para cada producto en el carro
+    	ArrayList<String> prodsNoStock=new ArrayList<String>();
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		if(producto.getStock()-cantidad<0) {
+    			prodsNoStock.add(producto.getNombre()+" Disponible: "+producto.getStock()+" Solicitado: "+cantidad);
+    		}
+    	}
+    	if(prodsNoStock.size()!=0) {
+    		carro.clear();
+    		redirectAttributes.addFlashAttribute("prodsNoStock", prodsNoStock);
+        	return "redirect:/user/fin";
+    	}
     	
     	Pedido pedido=new Pedido(user);
     	//agregar numero de orden
     	//pedido.setProductoList(carro);
 
     	pedido=pedidoService.createOrUpdatePedido(pedido);
-//
-//    	for(Object[] arr:carro) {
-//    		Producto producto=(Producto) arr[0];
-//    		Integer cantidad=(Integer) arr[1];
-//    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad);
-//    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
-//    	}
-//    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
+
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		producto.setStock(producto.getStock()-cantidad);
+    		productoService.createOrUpdateProducto(producto);
+    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad);
+    		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
+    	}
+    	redirectAttributes.addFlashAttribute("pedidoId", pedido.getId());
+    	carro.clear();
     	return "redirect:/user/fin";
     }
     
@@ -122,4 +146,66 @@ public class PedidoController {
     	model.addAttribute("user", user);
     	return "fin.jsp";
     }
+    @RequestMapping(value="/user/eliminar/carro/{productoId}",method=RequestMethod.GET)
+    public String eliminarCarro(@PathVariable("productoId") Long productoId,
+    		HttpSession session) {
+    	ArrayList<Object[]> carro=new ArrayList<Object[]>();
+    	if(session.getAttribute("carro")==null) {
+    		session.setAttribute("carro", carro);
+    	}else {
+    		carro= (ArrayList<Object[]>) session.getAttribute("carro");
+    	}
+    	
+    	int index=0;
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		if(productoId==producto.getId()) {
+    			carro.remove(index);
+    			break;
+    		}
+    		index+=1;
+    	}
+    	
+    	session.setAttribute("carro", carro);
+    	return "redirect:/user/checkout";
+    }
+    @RequestMapping(value="/user/editar/carro/{productoId}/{step}",method=RequestMethod.GET)
+    public String editarCarro(@PathVariable("productoId") Long productoId,@PathVariable("step") Integer step,
+    		HttpSession session) {
+    	ArrayList<Object[]> carro=new ArrayList<Object[]>();
+    	if(session.getAttribute("carro")==null) {
+    		session.setAttribute("carro", carro);
+    	}else {
+    		carro= (ArrayList<Object[]>) session.getAttribute("carro");
+    	}
+    	
+    	ArrayList<Object[]> newCarro=new ArrayList<Object[]>();
+    	for(Object[] arr:carro) {
+    		Producto producto=(Producto) arr[0];
+    		Integer cantidad=(Integer) arr[1];
+    		
+    		if(productoId==producto.getId()) {
+    			Integer newCantidad=cantidad+step;
+    			if(newCantidad<1) {
+    				newCantidad=1;
+    			}
+    			Object arrTemp[]= {producto,newCantidad};
+    			newCarro.add(arrTemp);
+    		}else {
+    			newCarro.add(arr);
+    		}
+    	}
+    	
+    	session.setAttribute("carro", newCarro);
+    	return "redirect:/user/checkout";
+    }
+    @RequestMapping ("admin/allPedidos")
+    public String showAll(Model model) {
+	List<ProductoPedido> productoPedidos=productoPedidoService.allProductoPedido();
+//	List<Pedido> pedidos=pedidoService.allPedido();
+	    	model.addAttribute("productoPedidos", productoPedidos);
+	    //	model.addAttribute("pedido", pedidos);
+	    	return "pedidos.jsp";
+
+}
 }

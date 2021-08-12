@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,16 +14,22 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-	<title>Welcome</title>
+	<title>Pedidos</title>
 </head>
 <body>
 
 	<div class="container my-4">
 	
 		<ul class="nav">
+  			<li class="nav-item">
+				<a class="nav-link" href="/admin/productos">Productos</a>
+			</li>
+  			<li class="nav-item">
+				<a class="nav-link" href="/admin/categorias">Categorias</a>
+			</li>
 			<li class="nav-item">
-    			<a class="nav-link" href="/">Home</a>
-  			</li>
+				<a class="nav-link" href="/admin/allPedidos">Pedidos</a>
+			</li>
 			<li class="nav-item">
     			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -31,21 +38,31 @@
   			</li>
 		</ul>
 		
-		<c:choose>
-  			<c:when test="${prodsNoStock!=null}">
-  				<h1>Lo sentimos ${user.nombre}</h1>
-				<h3>Tu pedido No se ha registrado</h3>
-				<h3>Productos con error:</h3>
-				<c:forEach var="msg" items="${prodsNoStock}">
-    				<p class="text-danger"><c:out value="${msg}"/></p>
-				</c:forEach>					
-			</c:when>
-			<c:otherwise>
-				<h1>Gracias ${user.nombre}</h1>
-				<h3>Tu pedido esta registrado</h3>
-				<h3>Pedido ID: ${pedidoId}</h3>					
-			</c:otherwise>
-		</c:choose>
+		
+		<div class="row my-3">
+			<div class="col-lg-5">
+				<table class="table table-sm table-borderless border border-dark">
+					<thead class="bg-mybg text-white">
+						<tr>
+							<th scope="col">orden</th>
+							<th scope="col">nombre</th>
+							<th scope="col">producto</th>
+							<th scope="col">cantidad</th>
+						</tr>
+					</thead>
+					<tbody class="bg-white">
+						<c:forEach var="productoPedido" items="${productoPedidos}">
+						<tr>
+							<td>${productoPedido.pedido.id}</td>
+							<td>${productoPedido.pedido.user.nombre}</td>
+							<td>${productoPedido.producto.nombre}</td>
+							<td>${productoPedido.cantidad}</td>
+						</tr>
+						</c:forEach>		
+					</tbody>
+				</table>
+			</div>
+		</div>
 		
 	</div>
 			

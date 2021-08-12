@@ -18,35 +18,47 @@
 <body>
 
 	<div class="container my-4">
-	
-		<div class="row my-4">
-  			<div class="col-lg-11"><h1 class="mx-2 mb-0 pb-2">Confirma tu pedido ${user.nombre}</h1></div>
-  			<div class="col-lg"><div class="mt-4"><a href="/logout">Logout</a></div></div>
-  		</div>
+  		<ul class="nav">
+			<li class="nav-item">
+    			<a class="nav-link" href="/">Home</a>
+  			</li>
+			<li class="nav-item">
+    			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
+        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        			<button type="submit" class="btn btn-link mb-1">Logout</button>
+    			</form>	
+  			</li>
+		</ul>
 		
-		
+		<h1>Confirma tu pedido ${user.nombre}</h1>
 		<h3>Mi carro</h3>
 		<div class="row my-3">
-			<div class="col-lg-5">
+			<div class="col-lg-12">
 				<table class="table table-sm table-borderless border border-dark">
 					<thead class="bg-mybg text-white">
 						<tr>
-							<th scope="col">Cantidad</th>
 							<th scope="col">Producto</th>
+							<th scope="col">Precio/unidad</th>
+							<th scope="col">Stock</th>
+							<th scope="col">Cantidad a comprar</th>
+							<th scope="col">Opciones</th>
 						</tr>
 					</thead>
 					<tbody class="bg-white">
 						<c:forEach var="arr" items="${carro}">
 						<tr>
 							<td>${arr[0].nombre}</td>
-							<td>${arr[1]}</td>
+							<td>${arr[0].precio}</td>
+							<td>${arr[0].stock}</td>
+							<td><a class="btn btn-outline-dark py-0 mr-3" href="/user/editar/carro/${arr[0].id}/-1" role="button">-</a> ${arr[1]} <a class="btn btn-outline-dark py-0 ml-3" href="/user/editar/carro/${arr[0].id}/1" role="button">+</a></td>
+							<td><a href="/user/eliminar/carro/${arr[0].id}">Eliminar del carro</a></td>
 						</tr>
 						</c:forEach>		
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
+		<h3>Total: ${precioTotal }</h3>
 		<form method="POST" action="/user/confirmar">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					
