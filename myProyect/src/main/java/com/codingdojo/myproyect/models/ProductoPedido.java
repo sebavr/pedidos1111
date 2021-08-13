@@ -28,7 +28,7 @@ public class ProductoPedido {
 	//@Size(min = 5, max = 200)
 	private Integer cantidad;
     private Double precioTotal;
-	
+	private String instrucciones;
 	//------------createdAt updatedAt------------------
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -71,6 +71,22 @@ public class ProductoPedido {
 		this.pedido = pedido;
 		this.precioTotal=precioTotal;
 		
+	}
+	
+	public ProductoPedido(Integer cantidad, Double precioTotal, String instrucciones, Producto producto,
+			Pedido pedido) {
+		super();
+		this.cantidad = cantidad;
+		this.precioTotal = precioTotal;
+		this.instrucciones = instrucciones;
+		this.producto = producto;
+		this.pedido = pedido;
+	}
+	public String getInstrucciones() {
+		return instrucciones;
+	}
+	public void setInstrucciones(String instrucciones) {
+		this.instrucciones = instrucciones;
 	}
 	public Long getId() {
 		return id;

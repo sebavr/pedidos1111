@@ -1,0 +1,44 @@
+PRODUCTOS
+	Agregar(Un producto puede tener una o mas caterogias)
+	Eliminar
+	Editar
+	Mostrar Producto
+	Mostrar Productos por caterogias
+	Agregar al carrito
+
+CATEGORIAS
+	Agregar 
+	Eliminar
+	Listar 
+
+USUARIO
+	CLIENTE
+	Registrarse
+	Login
+	ADMIN
+	Registrarse(El primer usuario en registrarse es el admin)
+	Login 
+
+PEDIDO
+	Registrar Pedido(Cliente)
+	Consultar Pedidos(Admin)
+	Fecha
+	IdPedido
+	IdUsuario
+	Productos
+
+CONSIDERACIONES
+	Un cliente puede realizar un numero ilimitado de pedidos
+	La aplicacion debe tener dos paginas principales, una para el admin
+	y otras para los clientes.
+	Sólo el Admin puede adminstrar los productos y las categorias
+	El administrador debe poder ver los pedidos realizados por los clientes
+	El usuario debe ir agregando los productos al carrito y cuanto termine
+	se debe generar un pedido con los datos del carrito.
+	Un usuario no puede realizar un pedido si no ha iniciado sesion.
+
+
+
+
+
+

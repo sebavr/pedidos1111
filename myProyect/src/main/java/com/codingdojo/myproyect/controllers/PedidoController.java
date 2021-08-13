@@ -59,7 +59,7 @@ public class PedidoController {
     
     @RequestMapping(value="/user/agregar/carro/{productoId}",method=RequestMethod.POST)
     public String agregarCarro(@PathVariable("productoId") Long productoId,@RequestParam("cantidad") Integer cantidad,
-    		HttpSession session) {
+    		@RequestParam("instrucciones") String instrucciones,HttpSession session) {
     	ArrayList<Object[]> carro=new ArrayList<Object[]>();
     	if(session.getAttribute("carro")==null) {
     		session.setAttribute("carro", carro);
@@ -67,7 +67,7 @@ public class PedidoController {
     		carro= (ArrayList<Object[]>) session.getAttribute("carro");
     	}
     	Producto producto=productoService.findProducto(productoId);
-    	Object arr[]= {producto,cantidad};
+    	Object arr[]= {producto,cantidad,instrucciones};
     	carro.add(arr);
     	session.setAttribute("carro", carro);
     	return "redirect:/pedir";
@@ -138,12 +138,14 @@ public class PedidoController {
     	for(Object[] arr:carro) {
     		Producto producto=(Producto) arr[0];
     		Integer cantidad=(Integer) arr[1];
-  		
+    		String instrucciones=(String) arr[2];
     		producto.setStock(producto.getStock()-cantidad);   		
     		precioTotal+=producto.getPrecio()*cantidad;
     		productoService.createOrUpdateProducto(producto);
     		
-    		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
+    		//ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
+    		ProductoPedido productoPedido=new ProductoPedido(cantidad, precioTotal, instrucciones, producto,pedido);
+
     		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
     	}
       	pedido.setPrecioTotal(precioTotal);
@@ -203,13 +205,13 @@ public class PedidoController {
     	for(Object[] arr:carro) {
     		Producto producto=(Producto) arr[0];
     		Integer cantidad=(Integer) arr[1];
-    		
+    		String instrucciones=(String) arr[2];
     		if(productoId==producto.getId()) {
     			Integer newCantidad=cantidad+step;
     			if(newCantidad<1) {
     				newCantidad=1;
     			}
-    			Object arrTemp[]= {producto,newCantidad};
+    			Object arrTemp[]= {producto,newCantidad,instrucciones};
     			newCarro.add(arrTemp);
     		}else {
     			newCarro.add(arr);
