@@ -34,4 +34,10 @@ body{
 .imagenProducto{
 	max-width:100%;
 }
+li a{
+	color:#ffffff;
+}
+li a:hover{
+	color:#dddddd;
+}
 

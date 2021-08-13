@@ -172,6 +172,8 @@ public class PedidoController {
     	    	model.addAttribute("productoPedidos", productoPedidos);
 
     	    	return "pedidos.jsp";
+    	    	
+    	    	
     
     }
   
@@ -230,6 +232,7 @@ public class PedidoController {
     	session.setAttribute("carro", newCarro);
     	return "redirect:/user/checkout";
     }
+    
 
 }
     
