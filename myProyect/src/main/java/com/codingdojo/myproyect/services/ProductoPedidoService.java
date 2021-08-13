@@ -39,7 +39,5 @@ public class ProductoPedidoService {
             return;
         }
     }
-	public List<ProductoPedido> buscarProductoPedido(Long id){
-		return productopedidoRepository.findProductoPedido(id);
-	}
+
 }

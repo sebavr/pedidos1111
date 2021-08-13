@@ -13,7 +13,5 @@ public interface ProductoPedidoRepository extends CrudRepository<ProductoPedido,
 	
     List<ProductoPedido> findAll();
     
-   // @Query("SELECT pp FROM ProductoPedido pp JOIN pp.pedido p WHERE p.id=?1")
-    @Query("SELECT pp FROM ProductoPedido pp WHERE pp.pedido.id=?1")
-    List<ProductoPedido> findProductoPedido(Long id);
+
 }
