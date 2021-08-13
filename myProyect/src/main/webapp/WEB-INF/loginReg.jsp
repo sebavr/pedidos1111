@@ -13,23 +13,56 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-	<title>Welcome</title>
+	<title>Login y registro</title>
 </head>
 <body>
 
-	<div class="container my-4">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="divgrande col-lg-3">
+			<div class="center">
+  				<img id="logochico" src="/imagenes/logochico.png" class="" alt="...">
+  				<form class="px-4" method="POST" action="/login">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					
+					 <div class="form-group">
+    					<label for="email" class="text-white">Email</label>
+    					<input type="email" id="email" class="form-control" name="username" placeholder="Email" required>
+  					</div>
+  					
+					<div class="form-group">
+						<label for="password" class="text-white">Password</label>
+						<input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+					</div>
+			
+					<button type="submit" class="btn btn-danger">Ingresar</button>
+					<c:if test = "${errorLog != null}">
+    					<p class="text-danger">${errorLog}</p>				
+					</c:if>
+				</form>
+				<button type="button" class=" ml-3 mt-4 btn btn-link" data-toggle="modal" data-target="#exampleModal">Registrarse</button>
+			</div>
+			
+		</div>
+		<div class="divgrande col-lg-9 px-0"><img id="imglogin" src="/imagenes/login-1200-2000.jpeg" class="" alt="..."></div>
+	</div>
+	</div>
 	
-		<div class="row my-4">
-  			<div class="col-lg-4"><h1 class="mx-2 mb-0 pb-2">Welcome</h1></div>
-  			<div class="offset-lg-7 col-lg"></div>
-  		</div>
-		
-		<div class="row">
-			<div class="my-2 col-lg-6">
-				<div class="text-white bg-mybg border border-dark border-bottom-0">
-					<p class="my-0 mx-3 p-2">Register</p>
-				</div>
-				<form:form action="/registration" method="POST" modelAttribute="user" class="border border-dark p-4 bg-white">
+	
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form:form action="/registration" method="POST" modelAttribute="user" class="border border-dark p-4 bg-white">
 					
 					<div class="form-group row">
 						<form:label for="nombre" class="col-lg-4 col-form-label" path="nombre">Nombre</form:label>
@@ -79,43 +112,21 @@
 						</div>
 					</div>
 
-					<button type="submit" class="offset-lg-9 col-lg-3 btn btn-block btn-outline-dark">Submit</button>
+					<button type="submit" class="offset-lg-9 col-lg-3 btn btn-block btn-danger">Registrarse</button>
 					<c:if test = "${errorReg != null}">
     					<p class="text-danger">${errorReg}</p>				
 					</c:if>
 				</form:form>
-			</div>
-
-			<div class="my-2 col-lg-6">
-				<div class="text-white bg-mybg border border-dark border-bottom-0">
-					<p class="my-0 mx-3 p-2">Login</p>
-				</div>
-				<form class="border border-dark p-4 bg-white" method="POST" action="/login">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<div class="form-group row">
-						<label for="email" class="col-lg-4 col-form-label">Email</label>
-						<div class="col-lg">
-							<input type="email" id="email" class="form-control" name="username" required>
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<label for="password" class="col-lg-4 col-form-label">Password</label>
-						<div class="col-lg">
-							<input type="password" id="password" class="form-control" name="password" required>
-						</div>
-					</div>
-			
-					<button type="submit" class="offset-lg-9 col-lg-3 btn btn-block btn-outline-dark">Submit</button>
-					<c:if test = "${errorLog != null}">
-    					<p class="text-danger">${errorLog}</p>				
-					</c:if>
-				</form>
-			</div>
-		</div>
-		
-	</div>
-			
+        
+        
+      </div>
+      <div class="modal-footer">
+<!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+<!--         <button type="button" class="btn btn-danger">Registrarse</button> -->
+      </div>
+    </div>
+  </div>
+</div>		
 		
 	
 	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

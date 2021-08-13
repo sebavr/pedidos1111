@@ -20,8 +20,8 @@ public class ProductoPedidoService {
     public List<ProductoPedido> allProductoPedido() {
         return productopedidoRepository.findAll();
            }
-    public List<Object[]> all(Long id) {
-        return productopedidoRepository.findProductoPedido(id);
+    public List<Object[]> getProductoPedido(Long id) {
+        return productopedidoRepository.getProductoPedido(id);
            }
     
     public ProductoPedido findProductoPedido(Long id) {
@@ -43,4 +43,5 @@ public class ProductoPedidoService {
             return;
         }
     }
+
 }

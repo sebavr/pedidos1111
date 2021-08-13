@@ -50,9 +50,19 @@
 		</ul>
 	</div>
 	
-	<div class="mx-3 d-flex justify-content-end">
-		<a class="btn btn-danger" href="/user/checkout" role="button">Ir al carro</a>
-	</div>
+	
+	<ul class="nav justify-content-end mr-3 my-1">
+	<c:if test = "${user != null}">
+  			<li class="nav-item">
+				<a class="nav-link disabled"><i class="bi bi-person-fill"></i> ${user.nombre} ${user.apellido}</a>
+			</li>
+			</c:if>
+			<li class="nav-item">
+				<a class="btn btn-danger" href="/user/checkout" role="button">Ir al carro</a>
+			</li>		
+		</ul>
+		
+	
 	<div id="enlaces" class="container-fluid">
 		<div class="border border-secondary mb-4"></div>
 		<ul class="nav justify-content-center mt-3">

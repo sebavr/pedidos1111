@@ -12,14 +12,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-	<title>Welcome</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style1.css">
+	<title>Feedback</title>
 </head>
-<body>
+<body><div id="encabezado" class="container-fluid pb-3">
+		 <img class="rounded mx-auto d-block" src="/imagenes/Logo1.png" alt="Italian Trulli">
+		 </div>
 
 	<div class="container my-4">
 	
 		<ul class="nav">
+		<li class="nav-item">
+				<a class="nav-link disabled"><i class="bi bi-person-fill"></i> ${user.nombre} ${user.apellido}</a>
+			</li>
 			<li class="nav-item">
     			<a class="nav-link" href="/">Home</a>
   			</li>
@@ -30,6 +36,9 @@
     			</form>	
   			</li>
 		</ul>
+		<div class="container border border-secondary mb-4"></div>		
+		
+		<div class="texto bg-white">
 		<c:choose>
   			<c:when test="${prodsNoStock!=null}">
   				<h1>Lo sentimos ${user.nombre}</h1>
@@ -45,7 +54,7 @@
 				<h3>Pedido orden: ${numeroOrden}</h3>					
 			</c:otherwise>
 		</c:choose>
-		
+		</div>
 	</div>
 			
 		

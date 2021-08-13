@@ -218,6 +218,7 @@ public class PedidoController {
     	session.setAttribute("carro", newCarro);
     	return "redirect:/user/checkout";
     }
+    
 
 
     
@@ -236,7 +237,7 @@ public class PedidoController {
 	public String showPedido (@PathVariable("pedidoId") Long id, Model model) {
 		
 		Pedido pedido=pedidoService.findPedido(id);	
-		List<Object[]> productoPedidos=(List<Object[]>) productoPedidoService.findProductoPedido(pedido.getId());
+		List<Object[]> productoPedidos=productoPedidoService.getProductoPedido(pedido.getId());
 				
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("productoPedidos", productoPedidos);

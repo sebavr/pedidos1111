@@ -14,26 +14,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styleP.css">
+    <link rel="stylesheet" href="/css/style.css">
 
 	<title>Pedidos</title>
 
 </head>
-<body>
-
-	<div class="container my-4">
-	
-			<ul class="nav">
-
-  			<li class="nav-item">
-
+<body style="background-color:#111111;">
+    <div class="container-fluid">
+        <ul class="nav  py-2 bg-dark">
+			<li class="nav-item">
 				<a class="nav-link" href="/admin/productos">Productos</a>
 			</li>
   			<li class="nav-item">
 				<a class="nav-link" href="/admin/categorias">Categorias</a>
 			</li>
 			<li class="nav-item">
-
 				<a class="nav-link" href="/admin/allPedidos">Pedidos</a>
 
 			</li>
@@ -46,12 +41,12 @@
 		</ul>
 
 
-        <h2 class="my-3">Pedidos</h2>
+        <h2 class="my-4 text-white">Pedidos</h2>
         
         <div class="row my-3">
 			<div class="col">
 				<table class="table table-sm table-light border border-1">
-					<thead class="bg-mybg">
+					<thead class="bg-mybg text-white ">
 						<tr>
 							
 							<th scope="col" class="border border-1">Pedido Id</th>
