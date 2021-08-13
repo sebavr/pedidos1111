@@ -1,17 +1,22 @@
 body{
-	background-color:#1A0008;
+	background-color:#111111;
+}
+#encabezado{
+	background-color:#000000;
 }
 .bg-mybg{
 	background-color:#343a40;/* 343a40 */ 
 }
-
-h1,h3{
-	color:white;
-	background-color:#82151d;
-	    margin-bottom: 0px;
+#encabezado img {
+	height:100px;
+}
+/* h1,h3{ */
+/* 	color:white; */
+/* 	background-color:#82151d; */
+/* 	    margin-bottom: 0px; */
 	    
 	
-}
+/* } */
 
 .texto{
 	opacity: 0.75;

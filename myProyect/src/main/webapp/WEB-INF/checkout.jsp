@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isErrorPage="true" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="es">
@@ -12,15 +13,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/style1.css">
 	<title>Checkout</title>
 </head>
-<body><div id="encabezado" class="container-fluid">
+<body>
+<div id="encabezado" class="container-fluid pb-3">
 		 <img class="rounded mx-auto d-block" src="/imagenes/Logo1.png" alt="Italian Trulli">
 		 </div>
 
 	<div class="container my-4">
   		<ul class="nav">
+  			<li class="nav-item">
+				<a class="nav-link disabled"><i class="bi bi-person-fill"></i> ${user.nombre} ${user.apellido}</a>
+			</li>
 			<li class="nav-item">
     			<a class="nav-link" href="/">Home</a>
   			</li>
@@ -31,9 +37,8 @@
     			</form>	
   			</li>
 		</ul>
-		
-		<h1>Confirma tu pedido ${user.nombre}</h1>
-		<h3>Mi carro</h3>
+<div class="container border border-secondary mb-4"></div>		
+		<h3 class="text-white">Carro de compras:</h3>
 		<div class="row my-3">
 			<div class="col-lg-12">
 				<table class="table table-sm table-borderless border border-dark">
@@ -50,7 +55,7 @@
 						<c:forEach var="arr" items="${carro}">
 						<tr>
 							<td>${arr[0].nombre}</td>
-							<td>${arr[0].precio}</td>
+							<td><fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${arr[0].precio}" /></td>
 							<td>${arr[0].stock}</td>
 							<td><a class="btn btn-outline-dark py-0 mr-3" href="/user/editar/carro/${arr[0].id}/-1" role="button">-</a> ${arr[1]} <a class="btn btn-outline-dark py-0 ml-3" href="/user/editar/carro/${arr[0].id}/1" role="button">+</a></td>
 							<td><a href="/user/eliminar/carro/${arr[0].id}">Eliminar del carro</a></td>
@@ -60,7 +65,7 @@
 				</table>
 			</div>
 		</div>
-		<h3>Total: ${precioTotal }</h3>
+		<h3 class="text-white my-2">Total: $<fmt:formatNumber type = "number" maxFractionDigits = "0" value = "${precioTotal}" /></h3>
 		<form method="POST" action="/user/confirmar">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					
