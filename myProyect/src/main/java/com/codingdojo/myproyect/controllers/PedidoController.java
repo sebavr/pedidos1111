@@ -205,13 +205,13 @@ public class PedidoController {
     	for(Object[] arr:carro) {
     		Producto producto=(Producto) arr[0];
     		Integer cantidad=(Integer) arr[1];
-    		
+    		String instrucciones=(String) arr[2];
     		if(productoId==producto.getId()) {
     			Integer newCantidad=cantidad+step;
     			if(newCantidad<1) {
     				newCantidad=1;
     			}
-    			Object arrTemp[]= {producto,newCantidad};
+    			Object arrTemp[]= {producto,newCantidad,instrucciones};
     			newCarro.add(arrTemp);
     		}else {
     			newCarro.add(arr);
