@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ page isErrorPage="true" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -19,22 +19,17 @@
 	<title>Pedidos</title>
 
 </head>
-<body>
-
-	<div class="container my-4">
-	
-		<ul class="nav">
-
-  			<li class="nav-item">
-
+<body style="background-color:#111111;">
+    <div class="container-fluid">
+        <ul class="nav  py-2 bg-dark">
+			<li class="nav-item">
 				<a class="nav-link" href="/admin/productos">Productos</a>
 			</li>
   			<li class="nav-item">
 				<a class="nav-link" href="/admin/categorias">Categorias</a>
 			</li>
 			<li class="nav-item">
-
-				<a class="nav-link" href="admin/allPedidos">Pedidos</a>
+				<a class="nav-link" href="/admin/allPedidos">Pedidos</a>
 
 			</li>
 			<li class="nav-item">
@@ -46,34 +41,29 @@
 		</ul>
 
 
-        <h2>Pedidos</h2>
+        <h2 class="my-4 text-white">Pedidos</h2>
         
-        <div class="row">
+        <div class="row my-3">
 			<div class="col">
-				<table class="table table-sm table-borderless border border-dark">
-					<thead class="bg-mybg text-white">
+				<table class="table table-sm table-light border border-1">
+					<thead class="bg-mybg text-white ">
 						<tr>
-							<th scope="col">Pedido Id</th>
-							<th scope="col">Numero de Orden</th>
-					 	    <th scope="col">Nombre Usuario</th>
-							<th scope="col">Fecha creacion</th>					
-							<th scope="col">Productos</th>
-							<th scope="col">Cantidad Productos</th>
-							<th scope="col">Precio total</th>
+							
+							<th scope="col" class="border border-1">Pedido Id</th>
+							<th scope="col" class="border border-1">Numero de Orden</th>
+							<th scope="col" class="border border-1">Fecha creacion</th>					
+							<th scope="col" class="border border-1">Detalle compra</th>
 							
 						</tr>
 					</thead>
 					<tbody class="">
-						<c:forEach var="productoPedido" items="${productoPedidos}">
+						<c:forEach var="pedido" items="${pedidos}">
 						<tr>
-							<td class="border border-1">${productoPedido.pedido.id}</td>
-							<td class="border border-1">${productoPedido.pedido.numeroOrden}</td> 
-							<td class="border border-1">${productoPedido.pedido.user.nombre}</td>
-							<td class="border border-1">${productoPedido.createdAt}</td>
-   					        <td class="border border-1">${productoPedido.producto.nombre}</td>
-							<td class="border border-1">${productoPedido.cantidad}</td>
-							<td class="border border-1">${productoPedido.precioTotal}</td>
-<%-- 				           <td><a href="/admin/editar/pedido/${pedido.id}">Ver detalle</a> --%>
+							<td class="border border-1">${pedido.id}</td>
+							<td class="border border-1">${pedido.numeroOrden}</td>
+							<td class="border border-1"><fmt:formatDate value="${pedido.createdAt}" pattern="HH:mm:ss a" /></td>
+					        <td class="border border-1"><a href="/admin/pedido/${pedido.id}">Ver detalle</a></td>
+					       
 						</tr>
 
 						</c:forEach>		

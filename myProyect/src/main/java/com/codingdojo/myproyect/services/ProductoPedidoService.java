@@ -19,7 +19,11 @@ public class ProductoPedidoService {
 
     public List<ProductoPedido> allProductoPedido() {
         return productopedidoRepository.findAll();
-    }
+           }
+    public List<Object[]> getProductoPedido(Long id) {
+        return productopedidoRepository.getProductoPedido(id);
+           }
+    
     public ProductoPedido findProductoPedido(Long id) {
         Optional<ProductoPedido> optionalProductoPedido = productopedidoRepository.findById(id);
         if(optionalProductoPedido.isPresent()) {
