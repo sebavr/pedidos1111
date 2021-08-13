@@ -138,9 +138,8 @@ public class PedidoController {
     	for(Object[] arr:carro) {
     		Producto producto=(Producto) arr[0];
     		Integer cantidad=(Integer) arr[1];
-    		
-    		producto.setStock(producto.getStock()-cantidad);
-    		
+  		
+    		producto.setStock(producto.getStock()-cantidad);   		
     		precioTotal+=producto.getPrecio()*cantidad;
     		productoService.createOrUpdateProducto(producto);
     		
@@ -165,17 +164,6 @@ public class PedidoController {
     }
 
     
-////////////////////////Pagina pedidos //////////////////////////////////////////////
-    @RequestMapping ("admin/allPedidos")
-        public String showAll( Model model) {
-    	List<ProductoPedido> productoPedidos=productoPedidoService.allProductoPedido();
-    	    	model.addAttribute("productoPedidos", productoPedidos);
-
-    	    	return "pedidos.jsp";
-    
-    }
-  
-
 
     @RequestMapping(value="/user/eliminar/carro/{productoId}",method=RequestMethod.GET)
     public String eliminarCarro(@PathVariable("productoId") Long productoId,
@@ -231,7 +219,29 @@ public class PedidoController {
     	return "redirect:/user/checkout";
     }
 
-}
-    
 
+    
+////////////////////////Pagina pedidos ADMIN //////////////////////////////////////////////
+	@RequestMapping ("admin/allPedidos")
+	public String showAll( Model model) {
+    List<Pedido> pedidos=pedidoService.allPedido();
+	model.addAttribute("pedidos", pedidos);
+	
+	return "pedidos.jsp";
+	}
+
+	
+	
+	@RequestMapping ("admin/pedido/{pedidoId}")
+	public String showPedido (@PathVariable("pedidoId") Long id, Model model) {
+		
+		Pedido pedido=pedidoService.findPedido(id);	
+		List<Object[]> productoPedidos=(List<Object[]>) productoPedidoService.findProductoPedido(pedido.getId());
+				
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("productoPedidos", productoPedidos);
+		return "pedidoID.jsp";
+	}
+	
+}
 
