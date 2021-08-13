@@ -4,6 +4,8 @@
 
 <%@ page isErrorPage="true" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!doctype html>
 <html lang="es">
@@ -64,17 +66,20 @@
                     </tr>
                 </thead>
                 <tbody class="">
-                    <c:forEach var="p" items="${productoPedidos}">
+                    <c:forEach var="productoPedido" items="${productoPedidos}">
                         <tr>
-                            <td class="border border-1">${p}</td><!-- vacio -->
-                            <td class="border border-1">${p}</td><!-- vacio -->
-                            <td class="border border-1">${p}</td><!-- vacio -->
-                            <td class="border border-1">${p}</td><!-- vacio -->
+                            <td class="border border-1">${productoPedido.producto.id}</td><!-- vacio -->
+                            <td class="border border-1">${productoPedido.producto.nombre}</td><!-- vacio -->
+                            <td class="border border-1">${productoPedido.cantidad}</td><!-- vacio -->
+                            <td class="border border-1">${productoPedido.producto.precio}</td><!-- vacio -->
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <p>Valor total de la compra: ${precioTotal}</p>
+            <p>Valor total de la compra: $
+            <span class="font-weight-bold"><fmt:formatNumber type = "number" maxFractionDigits = "0" value = "${pedido.precioTotal}" />
+            </span>
+            </p>
         </div>
        </div>
        

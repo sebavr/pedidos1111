@@ -31,7 +31,7 @@ public class Pedido {
 	//@Min(0)
 	//@Size(min = 5, max = 200)
 	private Integer numeroOrden;
-	
+	private Double precioTotal;
 	
 	//------------createdAt updatedAt------------------
 	@Column(updatable=false)
@@ -137,6 +137,12 @@ public class Pedido {
 //	}
 //	
 //	
+	public Double getPrecioTotal() {
+		return precioTotal;
+	}
+	public void setPrecioTotal(Double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
 		
 	//**********Getters Setters************************
 	

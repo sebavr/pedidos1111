@@ -146,7 +146,8 @@ public class PedidoController {
     		ProductoPedido productoPedido=new ProductoPedido(pedido,producto,cantidad, precioTotal);
     		productoPedidoService.createOrUpdateProductoPedido(productoPedido);
     	}
-      	
+      	pedido.setPrecioTotal(precioTotal);
+      	pedido=pedidoService.createOrUpdatePedido(pedido);
     	redirectAttributes.addFlashAttribute("numeroOrden", pedido.getNumeroOrden());
 
     	carro.clear();
@@ -237,7 +238,7 @@ public class PedidoController {
 	public String showPedido (@PathVariable("pedidoId") Long id, Model model) {
 		
 		Pedido pedido=pedidoService.findPedido(id);	
-		List<Object[]> productoPedidos=productoPedidoService.getProductoPedido(pedido.getId());
+		List<ProductoPedido> productoPedidos=productoPedidoService.getProductoPedido(pedido.getId());
 				
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("productoPedidos", productoPedidos);

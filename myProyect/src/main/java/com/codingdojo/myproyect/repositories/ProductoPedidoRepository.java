@@ -15,5 +15,5 @@ public interface ProductoPedidoRepository extends CrudRepository<ProductoPedido,
     
 
     @Query("SELECT pp FROM ProductoPedido pp WHERE pp.pedido.id=?1")
-    List<Object[]> getProductoPedido(Long id);
+    List<ProductoPedido> getProductoPedido(Long id);
 }

@@ -20,7 +20,7 @@ public class ProductoPedidoService {
     public List<ProductoPedido> allProductoPedido() {
         return productopedidoRepository.findAll();
            }
-    public List<Object[]> getProductoPedido(Long id) {
+    public List<ProductoPedido> getProductoPedido(Long id) {
         return productopedidoRepository.getProductoPedido(id);
            }
     
