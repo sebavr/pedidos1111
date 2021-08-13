@@ -71,6 +71,13 @@
        						<form:input type="text" id="urlImagen" class="form-control" path="urlImagen" required="true"/>
 						</div>
 				   </div>
+				   <div class="form-group row">	
+						<form:label for="urlImagenChico" class="col-lg-4 col-form-label" path="urlImagenChico">url de imagen chico: </form:label>
+						<div class="col-lg">
+							<form:errors path="urlImagenChico"/>
+       						<form:input type="text" id="urlImagenChico" class="form-control" path="urlImagenChico" required="true"/>
+						</div>
+				   </div>
 						
 						<div class="form-group row">
 						<form:label for="descripcion" class="col-lg-4 col-form-label" path="descripcion"> descripción: </form:label>

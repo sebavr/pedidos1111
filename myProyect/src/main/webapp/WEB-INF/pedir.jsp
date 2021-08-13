@@ -93,7 +93,7 @@
     							<a href="/producto/${producto.id}">Detalles</a>
     						</div>
     						<div class="col-lg-6">
-    							<img class="rounded mx-auto d-block" height="150px" src="imagenes/polloasado.jpeg" alt="Italian Trulli">
+    							<img class="rounded mx-auto d-block" height="150px" src="${producto.urlImagenChico}" alt="Italian Trulli">
     						</div>
     					</div>
     				</div>

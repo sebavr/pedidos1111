@@ -98,6 +98,7 @@ public class ProductoController {
     	prod.setNombre(producto.getNombre());
     	prod.setDescripcion(producto.getDescripcion());
     	prod.setUrlImagen(producto.getUrlImagen());
+    	prod.setUrlImagenChico(producto.getUrlImagenChico());
     	prod.setPrecio(producto.getPrecio());
     	prod.setStock(producto.getStock());
     	productoService.createOrUpdateProducto(prod);

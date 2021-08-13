@@ -63,6 +63,13 @@
 							<form:errors path="urlImagen"/>
        						<form:input type="text" id="urlImagen" class="form-control" path="urlImagen" required="true"/>
 						</div>
+							
+						<form:label for="urlImagenChico" class="my-2 col-lg-4 col-form-label" path="urlImagenChico">url de imagen chico: </form:label>
+						<div class="col-lg-8">
+							<form:errors path="urlImagenChico"/>
+       						<form:input type="text" id="urlImagenChico" class="form-control" path="urlImagenChico" required="true"/>
+						</div>
+				 
 						
 						<form:label for="descripcion" class="my-2 col-lg-4 col-form-label" path="descripcion"> descripción: </form:label>
 						<div class="col-lg-8">

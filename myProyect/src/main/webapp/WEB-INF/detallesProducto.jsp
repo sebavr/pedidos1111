@@ -18,7 +18,8 @@
 <body>
 	<div id="encabezado" class="container-fluid">
 		 <img class="rounded mx-auto d-block" src="/imagenes/logo1.png" alt="Italian Trulli">
-		 <div class="d-flex justify-content-end"><a id="entrar" class="py-2 px-3 rounded" href="/login">Entrar <i class="bi bi-box-arrow-up"></i></a></div>
+		 
+				
 		 <ul class="nav justify-content-center mt-0">
   			<li class="nav-item">
 				<h4><a class="nav-link disabled" href="" disable>Inicio</a></h4>
@@ -38,7 +39,7 @@
 	<div class="container px-0 my-4 mybg">
 		<div class="row">
 			<div class="col-lg-6 px-0">
-				<img class="imagenProducto" src="/imagenes/pollo.jpeg" alt="Italian Trulli">
+				<img class="imagenProducto" src="${producto.urlImagen}" alt="Italian Trulli">
 			</div>
 			<div class="col-lg-6 p-3">
 				<h3>${producto.nombre}</h3>

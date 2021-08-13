@@ -33,6 +33,7 @@ public class Producto {
 	private Double precio;
 	private Integer stock;
 	private String urlImagen;
+	private String urlImagenChico;
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
 	//------------createdAt updatedAt------------------
@@ -133,6 +134,12 @@ public class Producto {
 	}
 	public void setPedidoList(List<Pedido> pedidoList) {
 		this.pedidoList = pedidoList;
+	}
+	public String getUrlImagenChico() {
+		return urlImagenChico;
+	}
+	public void setUrlImagenChico(String urlImagenChico) {
+		this.urlImagenChico = urlImagenChico;
 	}
 	
 	//**********Getters Setters************************
