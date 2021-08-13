@@ -72,7 +72,7 @@ public class UserController {
         	User user=userService.findByEmail(email);
             Role role=user.getRole();
             if(role.getName().equals("ROLE_ADMIN")) {
-            	return "redirect:/admin/dashboard";
+            	return "redirect:/admin/categorias";
             }
     	}
     	return "redirect:/pedir";

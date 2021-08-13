@@ -12,13 +12,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style2.css">
 	<title>Editar Producto</title>
 </head>
-<body>
-
-	<div class="container my-4">
-		<ul class="nav">
+<body style="background-color:#111111;">
+<div class="container-fluid bg-dark">
+<ul class="nav container py-2">
+		
   			<li class="nav-item">
 				<a class="nav-link" href="/admin/productos">Productos</a>
 			</li>
@@ -26,19 +26,26 @@
 				<a class="nav-link" href="/admin/categorias">Categorias</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="/admin/allPedidos">Pedidos</a>
+			</li>
+			<li class="nav-item">
     			<form class="d-inline-block" id="logoutForm" method="POST" action="/logout">
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        			<button type="submit" class="btn btn-link mb-1">Logout</button>
+        			<button type="submit" class="btn btn-link mb-1 text-white">Logout</button>
     			</form>	
   			</li>
 		</ul>
+
+</div>
+	<div class="container my-4">
+
 		
-		<h1>Editar producto: ${producto.nombre}</h1>
+		<h1 class="text-white">Editar producto: ${producto.nombre}</h1>
 			
 		
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="text-white bg-mybg border border-dark border-bottom-0">
+				<div class="text-white bg-dark   border-bottom-0">
 					<p class="my-0 mx-3 p-2">Cambiar nombre del producto</p>
 				</div>
 				<form:form action="/admin/actualizar/nombre/producto/${producto.id }" method="POST" modelAttribute="producto" class="border border-dark p-4 bg-white">
@@ -96,7 +103,7 @@
 		
 		<div class="row mt-4">
 			<div class="col-lg-6">
-				<div class="text-white bg-mybg border border-dark border-bottom-0">
+				<div class="text-white bg-dark   border-bottom-0">
 					<p class="my-0 mx-3 p-2">Agregar categorias al producto</p>
 				</div>
 				<form class="border border-dark p-4 bg-white" method="POST" action="/admin/agregar/categoria/producto/${producto.id}">
@@ -119,8 +126,8 @@
 				</form>
 			</div>
 			<div class="col-lg-6">
-				<table class="table table-sm table-borderless border border-dark">
-					<thead class="bg-mybg text-white">
+				<table class="table  border border-secondary">
+					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Nombre</th>
 							<th scope="col">Opciones</th>
